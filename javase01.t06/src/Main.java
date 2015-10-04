@@ -29,7 +29,7 @@ public class Main {
 
         out.println("Попытка изменить несуществующую запись");
         MyNotebook.editEntry(4, "Четвертая запись, изменись!"); //В рамках сущестующего массива
-        MyNotebook.editEntry(6, "Четвертая запись, изменись!"); //Вне массива
+        MyNotebook.editEntry(6, "Шестая запись, изменись!"); //Вне массива
         MyNotebook.printAllEntry();
     }
 }
