@@ -8,43 +8,43 @@ public class Main {
         Scanner scanner = new Scanner(in);
         int valueN=0;
 
-        out.print("Enter the number of elements n: ");
+        out.print("Введите число элементов n: ");
         boolean noError=false;
         do {
             try {
                 valueN = Integer.parseInt(scanner.next());
                 noError = true;
             } catch (Exception exeption) {
-                out.print("Is not a number, try again: ");
+                out.print("Это не число, попробуйте снова: ");
                 noError=false;
             }
         }while(!noError);
-        out.print("You have entered a number: " + valueN);
+        out.println("Вы ввели число: " + valueN);
 
-        out.print("Enter limit E = : ");
+        out.print("Введите ограничение E = : ");
         double Eps =0;
         do {
             try {
                 Eps = Double.parseDouble(scanner.next());
                 noError = true;
             } catch (Exception exeption) {
-                out.println("Is not a number, try again: ");
+                out.println("Это не число, попробуйте снова: ");
                 noError=false;
             }
         }while(!noError);
-        out.println("You have entered a limit E: " + Eps);
+        out.println("Вы ввели ограничение E: " + Eps);
 
         int minimumNumber = -1;
         for (int i = 1; i < valueN + 1; i++) {
-            out.println("Function and when the value =  " + i + " back: " + ReturnAn(i));
+            out.println("Функция при i =  " + i + " возвращает: " + ReturnAn(i));
             if (minimumNumber == -1 && ReturnAn(i) < Eps) minimumNumber = i;
         }
 
         if (minimumNumber == -1) {
-            out.println("No item meets the criterion < " + Eps);
+            out.println("Нет элементов, удовлетворяющих ограничению < " + Eps);
         } else {
-            out.print("The smallest number satisfying criterion < " + Eps);
-            out.println(" equal: A(" + minimumNumber + ")= " + ReturnAn(minimumNumber));
+            out.print("Самый маленький номер последовательности  удовлетворяющий условию < " + Eps);
+            out.println(" равен : A(" + minimumNumber + ")= " + ReturnAn(minimumNumber));
         }
         scanner.close();
     }

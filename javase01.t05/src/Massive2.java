@@ -8,14 +8,14 @@ public class Massive2 {
         int sizeMas = 0;
         int[][] xMatrix;
 
-        out.println("Enter matrix size: ");
+        out.print("Введите размерность матрицы: ");
         boolean noError = false;
         do {
             try {
                 sizeMas = Math.abs(Integer.parseInt(scanner.next()));
                 noError = true;
             } catch (Exception exeption) {
-                out.println("Is not a number, try again: ");
+                out.println("Это не число, попробуйте снова: ");
                 noError = false;
             }
         } while (!noError);

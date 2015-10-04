@@ -5,7 +5,7 @@ public class Loops {
     public static void main(String... arg) {
         Scanner scanner = new Scanner(System.in);
 
-        out.println("Enter the beginning of the segment a: ");
+        out.print("Введите начало отрезка a: ");
         double pointA = 0;
         boolean noError = false;
         do {
@@ -13,31 +13,31 @@ public class Loops {
                 pointA = Double.parseDouble(scanner.next());
                 noError = true;
             } catch (Exception exeption) {
-                out.println("Is not a number, try again: ");
+                out.print("Это не число, попробуйте снова: ");
                 noError = false;
             }
         } while (!noError);
 
-        out.println("Enter the end of the segment b: ");
+        out.println("Введите конец отрезка b: ");
         double pointB = 0;
         do {
             try {
                 pointB = Double.parseDouble(scanner.next());
                 noError = true;
             } catch (Exception exeption) {
-                out.println("Is not a number, try again: ");
+                out.println("Это не число, попробуйте снова: ");
                 noError = false;
             }
         } while (!noError);
 
-        out.println("Enter the step size h: ");
+        out.print("Введите шаг h: ");
         double stepH = 0;
         do {
             try {
                 stepH = Double.parseDouble(scanner.next());
                 noError = true;
             } catch (Exception exeption) {
-                out.println("Is not a number, try again: ");
+                out.println("Это не число, попробуйте снова: ");
                 noError = false;
             }
         } while (!noError);

@@ -8,7 +8,7 @@ public class Loop2 {
         int[] sumNumber;
         int maxSum = Integer.MIN_VALUE;
 
-        out.print("Enter the sequence of elements separated by spaces: ");
+        out.print("Введите последовательность действительных чисел через пробел: ");
         String str = "";
         str = scanner.nextLine();
 
@@ -28,7 +28,7 @@ public class Loop2 {
             }
         }
 
-        out.println("Maximum = " + maxSum);
+        out.println("Максимальная сумма = " + maxSum);
         scanner.close();
     }
 }

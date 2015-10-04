@@ -1,71 +1,110 @@
-import java.util.ArrayList;
 import static java.lang.System.*;
 
 /**
- * Class notebook.
- * Allows you to create notes , add, edit and delete records .
+ * Класс блокнот.
+ * Позволяет создавать, редактировать и удалять записи .
  */
 class NotebookClass {
     /**
-     * List of records
+     * Массив записей
+     *
+     * @see WritingInTheNotebook
      */
-    private ArrayList<WritingInTheNotebook> MyNotebook;
+    private WritingInTheNotebook[] entry;
 
     /**
-     * The class constructor Notepad.
+     * Конструктор класса Блокнот.
      */
     public NotebookClass() {
-        MyNotebook = new ArrayList<WritingInTheNotebook>();
+        entry = new WritingInTheNotebook[1];
     }
 
     /**
-     * Adds a new entry in the notepad.
+     * Добавить новую запись в блокнот.
      *
-     * @param entry Entry text
+     * @param entry Текст записи
      */
     public void addNewEntry(String entry) {
-        MyNotebook.add(new WritingInTheNotebook(entry));
-    }
-
-    /**
-     * Displays the console all the entry from a notebook in a numbered form.
-     */
-    public void printAllEntry() {
-        int i = 1;
-        for (WritingInTheNotebook Entry : MyNotebook) {
-            out.println("[" + i + "]" + Entry.getEntry());
-            i++;
+        boolean notAdd = true;
+        for (int i = 0; i < this.entry.length; i++) {
+            if (this.entry[i] == null) {
+                this.entry[i] = new WritingInTheNotebook(entry);
+                notAdd = false;
+                continue;
+            }
+        }
+        //Если запись не была добавлена
+        if (notAdd) {
+            //Увеличиваем размер массива
+            enlarge();
+            //добавляем запись
+            this.entry[this.entry.length / 2] = new WritingInTheNotebook(entry);
         }
     }
 
     /**
-     * Modifies an existing entry in the notebook.
+     * Увеличивает размер массива записей
+     */
+    private void enlarge() {
+        WritingInTheNotebook[] newEntry = new WritingInTheNotebook[this.entry.length * 2];
+        for (int i = 0; i < this.entry.length; i++) {
+            newEntry[i] = new WritingInTheNotebook(this.entry[i].getEntry());
+        }
+        this.entry = newEntry;
+    }
+
+    /**
+     * Выводит на экран пронумерованный список записей.
+     */
+    public void printAllEntry() {
+        for (int i = 0; i < entry.length; i++) {
+            if (this.entry[i] != null) {
+                out.println("[" + (i + 1) + "]" + entry[i].getEntry());
+            }
+        }
+    }
+
+    /**
+     * Изменяет существующую запись блокнота.
      *
-     * @param number The serial number of the entry.
-     * @param entry  New text entry.
+     * @param number Порядковый номер записи.
+     * @param entry  Новый текст записи.
      */
     public void editEntry(int number, String entry) {
         number--;
-        if (number < MyNotebook.size() && number >= 0) {
-            WritingInTheNotebook edit = MyNotebook.get(number);
-            edit.setEntry(entry);
-            MyNotebook.set(number, edit);
+        if (number < this.entry.length && number >= 0 && this.entry[number] != null) {
+            this.entry[number].setEntry(entry);
         } else {
-            out.println("In this notebook " + MyNotebook.size() + " records!");
+            out.println("В этом блокноте всего " + (this.entry.length - 1) + " записей!");
         }
     }
 
     /**
-     * Deletes an existing entry from the notebook .
+     * Удаляет существующую запись в блокноте.
      *
-     * @param number number of entry deleted .
+     * @param number Номер записи для удаления .
      */
     public void deleteEntry(int number) {
         number--;
-        if (number < MyNotebook.size() && number >= 0) {
-            MyNotebook.remove(number);
+        if (number < this.entry.length && number >= 0 && this.entry[number] != null) {
+            this.entry[number] = null;
+            displacement();
         } else {
-            out.println("There is no record ");
+            out.println("Такой записи не существует");
         }
+    }
+
+    /**
+     * Смещает записи после удаления одной из записей.
+     */
+    private void displacement() {
+        WritingInTheNotebook[] newEntry = new WritingInTheNotebook[entry.length];
+        for (int i = 0, j = 0; i < entry.length; i++) {
+            if (this.entry[i] != null) {
+                newEntry[j] = new WritingInTheNotebook(entry[i].getEntry());
+                j++;
+            }
+        }
+        entry = newEntry;
     }
 }

@@ -1,33 +1,35 @@
 
-
 /**
- * The class in which to store the entry.
+ * Класс хранит запись блокнота.
  */
 class WritingInTheNotebook {
     /**
-     * A string that holds the entry.
+     * Переменная харнит запись блокнота.
      */
     private String entry;
 
     /**
-     * The class constructor , adds an entry
-     * @param newEntry A string that will be written in class
+     * Конструктор класса.
+     *
+     * @param newEntry Строка, которая будет добавленна в класс.
      */
-    WritingInTheNotebook(String newEntry) {
+    public WritingInTheNotebook(String newEntry) {
         entry = newEntry;
     }
 
     /**
-     * Changing old entry
-     * @param newEntry New entry
+     * Изменить старую запись.
+     *
+     * @param newEntry Новая запись.
      */
     void setEntry(String newEntry) {
         entry = newEntry;
     }
 
     /**
-     * Return entry
-     * @return entry
+     * Возвращает запись.
+     *
+     * @return запись
      */
     String getEntry() {
         return entry;
