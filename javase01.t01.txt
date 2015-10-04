@@ -1,0 +1,24 @@
+1. Создаим в диске С два файла: Main.java и Logic.java с содержимым:
+public class Main {
+
+	public static void main(String[] args) {
+		Logic logic = new Logic();
+		
+		System.out.println(logic.method());
+	}
+}
+
+public class Logic {
+	public String method(){
+		return "I am string in Logic.";
+	}
+}
+
+
+2. Запустим из командной строки команду javac для компиляции файлов:
+javac C:/Main.java
+3. По завершении компиляции запустим созданный файл:
+java Main
+
+на экране появится запись: 
+I am string in Logic.
