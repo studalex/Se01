@@ -1,37 +1,110 @@
 import static java.lang.System.*;
 
-public class Notebook {
-    public static void main(String... arg) {
-        NotebookClass MyNotebook = new NotebookClass();
+/**
+ * Класс блокнот.
+ * Позволяет создавать, редактировать и удалять записи .
+ */
+class Notebook {
+    /**
+     * Массив записей
+     *
+     * @see Entry
+     */
+    private Entry[] entry;
 
-        MyNotebook.addNewEntry("Первая запись в блокноте");
-        MyNotebook.addNewEntry("Вторая запись в блокноте");
-        MyNotebook.addNewEntry("Третья запись в блокноте");
-        MyNotebook.addNewEntry("Четвертая запись в блокноте");
-        out.println();
+    /**
+     * Конструктор класса Блокнот.
+     */
+    public Notebook() {
+        entry = new Entry[1];
+    }
 
-        MyNotebook.printAllEntry();
-        out.println();
+    /**
+     * Добавить новую запись в блокнот.
+     *
+     * @param entry Текст записи
+     */
+    public void addNewEntry(String entry) {
+        boolean notAdd = true;
+        for (int i = 0; i < this.entry.length; i++) {
+            if (this.entry[i] == null) {
+                this.entry[i] = new Entry(entry);
+                notAdd = false;
+                continue;
+            }
+        }
+        //Если запись не была добавлена
+        if (notAdd) {
+            //Увеличиваем размер массива
+            enlarge();
+            //добавляем запись
+            this.entry[this.entry.length / 2] = new Entry(entry);
+        }
+    }
 
-        MyNotebook.editEntry(3, "Третья запись в блокноте отредактирована");
-        MyNotebook.printAllEntry();
-        out.println();
+    /**
+     * Увеличивает размер массива записей
+     */
+    private void enlarge() {
+        Entry[] newEntry = new Entry[this.entry.length * 2];
+        for (int i = 0; i < this.entry.length; i++) {
+            newEntry[i] = new Entry(this.entry[i].getEntry());
+        }
+        this.entry = newEntry;
+    }
 
-        MyNotebook.deleteEntry(2);
-        MyNotebook.printAllEntry();
-        out.println();
+    /**
+     * Выводит на экран пронумерованный список записей.
+     */
+    public void printAllEntry() {
+        for (int i = 0; i < entry.length; i++) {
+            if (this.entry[i] != null) {
+                out.println("[" + (i + 1) + "]" + entry[i].getEntry());
+            }
+        }
+    }
 
-        out.println("Попытка удалить несуществующую запись");
-        MyNotebook.deleteEntry(4); //В рамках сущестующего массива
-        MyNotebook.deleteEntry(6); //Вне массива
-        MyNotebook.printAllEntry();
-        out.println();
+    /**
+     * Изменяет существующую запись блокнота.
+     *
+     * @param number Порядковый номер записи.
+     * @param entry  Новый текст записи.
+     */
+    public void editEntry(int number, String entry) {
+        number--;
+        if (number < this.entry.length && number >= 0 && this.entry[number] != null) {
+            this.entry[number].setEntry(entry);
+        } else {
+            out.println("В этом блокноте всего " + (this.entry.length - 1) + " записей!");
+        }
+    }
 
-        out.println("Попытка изменить несуществующую запись");
-        MyNotebook.editEntry(4, "Четвертая запись, изменись!"); //В рамках сущестующего массива
-        MyNotebook.editEntry(6, "Четвертая запись, изменись!"); //Вне массива
-        MyNotebook.printAllEntry();
+    /**
+     * Удаляет существующую запись в блокноте.
+     *
+     * @param number Номер записи для удаления .
+     */
+    public void deleteEntry(int number) {
+        number--;
+        if (number < this.entry.length && number >= 0 && this.entry[number] != null) {
+            this.entry[number] = null;
+            displacement();
+        } else {
+            out.println("Такой записи не существует");
+        }
+    }
+
+    /**
+     * Смещает записи после удаления одной из записей.
+     */
+    private void displacement() {
+        Entry[] newEntry = new Entry[entry.length];
+        for (int i = 0, j = 0; i < entry.length; i++) {
+            if (this.entry[i] != null) {
+                newEntry[j] = new Entry(entry[i].getEntry());
+                j++;
+            }
+        }
+        entry = newEntry;
     }
 }
-
-
