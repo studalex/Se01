@@ -13,7 +13,7 @@ class Entry {
      *
      * @param newEntry Строка, которая будет добавленна в класс.
      */
-    public Entry(String newEntry) {
+    Entry(String newEntry) {
         entry = newEntry;
     }
 
